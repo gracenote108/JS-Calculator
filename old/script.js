@@ -1,7 +1,7 @@
 import {Calculator} from './Calculator.js';
 import {Display} from './Display.js';
 import {Pad} from './Pad.js';
-import {CalcMath} from './CalcMath.js';
+import {CalcMath} from '../PostFixEngine.js';
 
 const pad = new Pad();
 const display = new Display();

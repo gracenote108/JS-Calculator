@@ -9,64 +9,61 @@ Object.freeze(Associativity);
 
 const opArray = ["+", "-", "/", "*", "(", ")"];
 
-export class CalcMath {
-  static add(num1, num2) {
-    return num1 + num2;
-  }
-  static subtract(num1, num2) {
-    return num1 - num2;
-  }
-  static multiply(num1, num2) {
-    return num1 * num2;
-  }
-  static divide(num1, num2) {
-    return num1 / num2;
-  }
-  static convertToPostfix(array) {
-    const exprArray = [...array];
-    const opStack = new Stack();
-    const postFixQueue = new Queue();
-
-    for (let i = 0; i < exprArray.length; i++) {
-      const current = exprArray[i];
-
-      if (!isOperator(current)) {
-        postFixQueue.enqueue(current);
-      } else if (current === "(") {
-        opStack.push(current);
-      } else if (current === ")") {
-        while (opStack.peek() !== "(") {
-          postFixQueue.enqueue(opStack.pop());
-        }
-        opStack.pop();
-      } else {
-        const currPrec = getPrecedence(current);
-        processOperator(current, currPrec, opStack, postFixQueue);
-      }
+class PostFixEngine {
+  constructor() {
+    this.solveProblem = function (equation) {
+      const converted = convertToPostfix(equation)
+      return calculatePostfix(converted)
     }
-
-    while (!opStack.isEmpty()) postFixQueue.enqueue(opStack.pop());
-
-    return postFixQueue.toArray();
-  }
-  static calculatePostfix(pfArray) {
-    const stack = new Stack();
-    const origArr = [...pfArray];
-    console.log(origArr);
-
-    for (let i = 0; i < origArr.length; i++) {
-      stack.push(origArr[i]);
-      if (isOperator(stack.peek())) {
-        let operator = stack.pop();
-        let rightOper = stack.pop();
-        let leftOper = stack.pop();
-        stack.push(performMath(operator, leftOper, rightOper));
-        console.log(stack.toArray());
-      }
-    }
-    return stack.toArray();
   }
 }
+
+function convertToPostfix (array) {
+  const exprArray = [...array];
+  const opStack = new Stack();
+  const postFixQueue = new Queue();
+
+  for (let i = 0; i < exprArray.length; i++) {
+    const current = exprArray[i];
+
+    if (!isOperator(current)) {
+      postFixQueue.enqueue(current);
+    } else if (current === "(") {
+      opStack.push(current);
+    } else if (current === ")") {
+      while (opStack.peek() !== "(") {
+        postFixQueue.enqueue(opStack.pop());
+      }
+      opStack.pop();
+    } else {
+      const currPrec = getPrecedence(current);
+      processOperator(current, currPrec, opStack, postFixQueue);
+    }
+  }
+
+  while (!opStack.isEmpty()) postFixQueue.enqueue(opStack.pop());
+
+  return postFixQueue.toArray();
+}
+
+function calculatePostfix (pfArray) {
+  const stack = new Stack();
+  const origArr = [...pfArray];
+  console.log(origArr)
+
+  for (let i = 0; i < origArr.length; i++) {
+    stack.push(origArr[i]);
+    if (isOperator(stack.peek())) {
+      let operator = stack.pop();
+      let rightOper = stack.pop();
+      let leftOper = stack.pop();
+      stack.push(performMath(operator, leftOper, rightOper));
+      console.log(stack.toArray());
+    }
+  }
+  return stack.toArray();
+}
+
 
 function performMath(arithOperator, leftOperand, rightOperand) {
   let result = 0;
@@ -111,7 +108,7 @@ function processOperator(value, valPrec, stack, queue) {
     processOperator(value, valPrec, stack, queue);
   } else {
     const valAsc = getAssociativity(value);
-    if (valAsc == Associativity.RightToLeft) stack.push(value);
+    if (valAsc === Associativity.RightToLeft) stack.push(value);
     else {
       queue.enqueue(stack.pop());
       processOperator(value, valPrec, stack, queue);
@@ -136,3 +133,7 @@ function getAssociativity(operator) {
   )
     return Associativity.LeftToRight;
 }
+
+const instance = new PostFixEngine()
+
+export default instance;

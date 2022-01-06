@@ -1,5 +1,5 @@
 import {NumKey} from './NumKey.js';
-import ce from "./CalcEngine.js";
+import ce from "./CalcManager.js";
 import * as refData from './referenceData.js';
 
 const numbers = refData.numbers;

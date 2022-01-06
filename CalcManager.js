@@ -1,4 +1,4 @@
-class CalcEngine{
+class CalcManager {
     constructor() {
         this.display = undefined;
         this.pad = undefined;
@@ -15,6 +15,6 @@ class CalcEngine{
     }
 }
 
-const instance = new CalcEngine();
+const instance = new CalcManager();
 
 export default instance;

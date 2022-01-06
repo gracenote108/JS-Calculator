@@ -1,4 +1,4 @@
-import {CalcMath} from './CalcMath.js';
+import {CalcMath} from '../PostFixEngine.js';
 
 const displayMap = new WeakMap();
 const padMap = new WeakMap();

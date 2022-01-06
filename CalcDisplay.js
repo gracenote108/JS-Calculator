@@ -1,4 +1,5 @@
-import ce from './CalcEngine.js';
+import ce from './CalcManager.js';
+import pe from './PostFixEngine.js';
 import {symType} from './referenceData.js';
 
 // Used to manage if we are inside a parenthesis or not.
@@ -11,12 +12,12 @@ export class CalcDisplay{
         parent.append(display);
         ce.display = this;
         ce.state.push(symType.initial);
-
         display.textContent = '0';
 
         this.manageDisplay = function (val, type){
             switch (val){
                 case '=':
+                    solve(display)
                     break;
                 case 'CE':
                     doBackSpace(display)
@@ -44,11 +45,32 @@ export class CalcDisplay{
                     break;
             }
         }
+    }
+}
 
-        this.showDisplay = function (){
-            return display.textContent;
+function solve(display){
+    const equation = prepareEquation(display.textContent);
+    const solved = pe.solveProblem(equation)
+    clearDisplay(display)
+    display.textContent = solved;
+}
+
+function prepareEquation(rawEq){
+    const equation = []
+    let num = '';
+    for (let char of rawEq){
+        if (!isNaN(char))
+            num += char;
+        else {
+            if (num.length > 0){
+                equation.push(num);
+                num = '';
+            }
+            equation.push(char)
         }
     }
+    equation.push(num)
+    return equation
 }
 
 function processNumType(val, display){
