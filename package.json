@@ -1,8 +1,9 @@
 {
   "name": "top-calc",
   "version": "1.0.0",
+  "type": "module",
   "description": "The Odin Project calculator project challenge.",
-  "main": "script.js",
+  "main": "old/script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

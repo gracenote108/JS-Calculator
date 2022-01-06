@@ -1,5 +1,12 @@
 import {NumKey} from './NumKey.js';
-import CalcEngine from "./CalcEngine.js";
+import ce from "./CalcEngine.js";
+import * as refData from './referenceData.js';
+
+const numbers = refData.numbers;
+const mathSymbols = refData.mathSymbols
+const displayCntrls = refData.displayCntrls;
+const symType = refData.symType;
+const parenSyms = refData.parenSyms;
 
 export class NumPad{
     constructor(parent) {
@@ -8,39 +15,24 @@ export class NumPad{
 
         generatePad(padBox);
     }
-
-}
-
-const numbers = {
-    'zero': 0,
-    'one':  1,
-    'two':  2,
-    'three': 3,
-    'four': 4,
-    'five': 5,
-    'six': 6,
-    'seven':7,
-    'eight':8,
-    'nine':9,
-}
-
-const mathsymbols = {
-    'plus':'+',
-    'minus':'-',
-    'multiply':'*',
-    'divide':'/',
-    'lparen': '(',
-    'rparen':')',
-}
-
-const displayCntrls = {
-    'backspace':'CE',
-    'clear':'C',
-    'equal':'=',
 }
 
 function generatePad(box){
-    for (let key in numbers){
-        box.append(new NumKey(key,numbers[key], CalcEngine.display.addToDisplay))
+    const addToDisplay = ce.display.addToDisplay;
+    const manageDisplay = ce.display.manageDisplay
+
+    for (let id in numbers){
+        box.append(new NumKey(id,numbers[id], symType.number , addToDisplay))
     }
+
+    for (let id in mathSymbols){
+        box.append(new NumKey(id,mathSymbols[id], symType.mathSymbol, addToDisplay))
+    }
+
+    for (let id in displayCntrls){
+        box.append(new NumKey(id,displayCntrls[id], symType.displayCntrl, manageDisplay))
+    }
+
+    box.append(new NumKey(parenSyms.lparen.name, parenSyms.lparen.sym, symType.lparen, addToDisplay))
+    box.append(new NumKey(parenSyms.rparen.name, parenSyms.rparen.sym, symType.rparen, addToDisplay))
 }

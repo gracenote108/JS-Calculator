@@ -9,7 +9,6 @@ export class Calculator{
 
         const calcDisplay = new CalcDisplay(calcBody);
         calcDisplay.addToDisplay(0)
-        console.log(calcDisplay.showDisplay())
 
         const numPad = new NumPad(calcBody)
     }
