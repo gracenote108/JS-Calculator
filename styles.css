@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+.numkey {
+    border-style: solid;
+    border-color: black;
+    border-width: thin;
+    margin: 2px 5px;
+    padding: 10px 30px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#calcbody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border-color: black;
+    border-style: solid;
+}
+
+#calcdisplay {
+    font-size: xx-large;
+    margin: 5px;
+    border-bottom: black;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+}
+
+#padbox {
+    display: grid;
+    grid-template-areas:
+    "lparen rparen backspace clear"
+    "seven eight nine multiply"
+    "four five six divide"
+    "one two three minus"
+    "zero equal equal plus";
+    width: auto;
+}
+
+#zero {
+    grid-area: zero;
+}
+
+#one {
+    grid-area: one;
+}
+
+#two {
+    grid-area: two;
+}
+
+#three {
+    grid-area: three;
+}
+
+#four {
+    grid-area: four;
+}
+
+#five {
+    grid-area: five;
+}
+
+#six {
+    grid-area: six;
+}
+
+#seven {
+    grid-area: seven;
+}
+
+#eight {
+    grid-area: eight;
+}
+
+#nine {
+    grid-area: nine;
+}
+
+#equal {
+    grid-area: equal;
+}
+
+#plus {
+    grid-area: plus;
+}
+
+#subtract {
+    grid-area: minus;
+}
+
+#multiply {
+    grid-area: multiply;
+}
+
+#divide {
+    grid-area: divide;
+}
+
+#backspace {
+    grid-area: backspace;
+}
+
+#clear {
+    grid-area: clear;
+}
+
+#lparen {
+    grid-area: lparen;
+}
+
+#rparen {
+    grid-area: rparen;
+}

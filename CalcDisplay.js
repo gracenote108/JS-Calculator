@@ -49,9 +49,11 @@ export class CalcDisplay{
 }
 
 function solve(display){
+    if (!ce.solvable)
+        return;
     const equation = prepareEquation(display.textContent);
-    const solved = pe.solveProblem(equation)
     clearDisplay(display)
+    const solved = pe.solveProblem(equation)
     display.textContent = solved;
 }
 
@@ -69,7 +71,9 @@ function prepareEquation(rawEq){
             equation.push(char)
         }
     }
-    equation.push(num)
+    if (num)
+        equation.push(num)
+    console.log(equation)
     return equation
 }
 
@@ -114,6 +118,7 @@ function processParens(val, display, curType){
                 break;
         }
         parenToggle = true;
+        ce.solvable = false;
         ce.state.push(curType);
     }
 
@@ -128,6 +133,7 @@ function processParens(val, display, curType){
                 break;
         }
         parenToggle = false;
+        ce.solvable = true;
         ce.state.push(curType);
     }
 }
@@ -136,6 +142,7 @@ function clearDisplay(display){
     display.textContent = '0';
     ce.state.clear();
     ce.state.push(symType.initial);
+    ce.pfdisplay.clearResults();
 }
 
 function doBackSpace(display){

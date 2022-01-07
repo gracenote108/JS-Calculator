@@ -2,6 +2,8 @@ class CalcManager {
     constructor() {
         this.display = undefined;
         this.pad = undefined;
+        this.pfdisplay = undefined;
+        this.solvable = true;
         this.state = []
 
         this.state.lastPeek = function(){

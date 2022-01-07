@@ -11,6 +11,7 @@ const parenSyms = refData.parenSyms;
 export class NumPad{
     constructor(parent) {
         const padBox = document.createElement('div');
+        padBox.setAttribute('id', 'padbox')
         parent.append(padBox)
 
         generatePad(padBox);

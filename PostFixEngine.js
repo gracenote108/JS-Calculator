@@ -1,5 +1,6 @@
 import { Stack } from "./Stack.js";
 import { Queue } from "./Queue.js";
+import cm from './CalcManager.js';
 
 const Associativity = {
   RightToLeft: 1,
@@ -13,6 +14,7 @@ class PostFixEngine {
   constructor() {
     this.solveProblem = function (equation) {
       const converted = convertToPostfix(equation)
+      cm.pfdisplay.setResults(equation.join(''), converted.join(''))
       return calculatePostfix(converted)
     }
   }
