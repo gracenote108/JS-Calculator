@@ -83,11 +83,16 @@ function processNumType(val, display){
     } else {
         display.textContent += val
     }
+    if (!parenToggle)
+        ce.solvable = true;
     ce.state.push(symType.number);
 }
 
 function processMathSymbol(val, display) {
     const lastType = ce.state.lastPeek();
+
+    if (lastType === symType.initial)
+        return;
 
     if (lastType !== symType.mathSymbol){
         switch (lastType) {
@@ -98,6 +103,7 @@ function processMathSymbol(val, display) {
                 break;
         }
     }
+    ce.solvable = false;
     ce.state.push(symType.mathSymbol);
 }
 

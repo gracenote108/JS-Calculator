@@ -29,8 +29,6 @@ body, html {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    border-color: black;
-    border-style: solid;
 }
 
 #calcdisplay {
@@ -45,6 +43,7 @@ body, html {
     display: grid;
     grid-template-areas:
     "lparen rparen backspace clear"
+    "seven eight nine multiply"
     "seven eight nine multiply"
     "four five six divide"
     "one two three minus"
